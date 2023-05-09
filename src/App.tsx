@@ -1,14 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Main from './pages/Main/Main';
+import Router from './shared/Router';
 
-function App() {
-  return (
-    <div className="App">
-     <Main />
-    </div>
-  );
+const App : React.FC = () => {
+  return <Router />
 }
 
 export default App;
