@@ -1,5 +1,5 @@
-import className from "classnames/bind";
 import React, { useState } from 'react';
+import className from "classnames/bind";
 import styles from "./Introduce.module.scss"
 import ReactPlayer from "react-player";
 import { useNavigate } from 'react-router-dom'
