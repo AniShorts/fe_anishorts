@@ -10,9 +10,9 @@ const Intro = () => {
 
   return (
     <div>
-      <div className='video-sort'>
+      <div className={cx("video_sort")}>
         <ReactPlayer
-          url={'https://youtu.be/Tqsz8nwsGU4'}    // 플레이어 url
+          url={'https://www.youtube.com/watch?v=gwbccjH9iAo'}    // 플레이어 url
           width='38rem'         // 플레이어 크기 (가로)
           height='60rem'        // 플레이어 크기 (세로)
           playing={true}        // 자동 재생 on
