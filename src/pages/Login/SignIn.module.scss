@@ -1,0 +1,65 @@
+@import "../../../public/scss/styles.scss";
+
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.array {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    margin: 1.6rem 0 0.8rem 2rem;
+}
+
+.customInput {
+    margin-bottom: 0.4rem;
+    padding: 0.6rem 0;
+    width: 90%;
+    border: 1px solid rgb(209, 213, 219);
+    outline: none;
+    border-radius: 0.6rem;
+    padding-left: 1rem;
+}
+
+.dupInput {
+    width: 65%;
+    margin: 0 2rem 0.4rem 0;
+    padding: 0.6rem 0;
+    outline: none;
+    border: 1px solid rgb(209, 213, 219);
+    border-radius: 0.6rem;
+    padding-left: 1rem;
+}
+
+.dupBtn {
+    padding: 0.8rem;
+    color: white;
+    background-color: #9BE3DE;
+    border-radius: 0.6rem;
+    border: 1px solid #BEEBE9;
+}
+
+.caution {
+    font-size: 0.8rem;
+    font-weight: bolder;
+    margin: 0 0 1rem 2.6rem;
+    color: red;
+}
+
+.btn {
+    margin-top: 1.4rem;
+    padding: 0.8rem 0;
+    width: 92%;
+    color: white;
+    background-color: #9BE3DE;
+    border-radius: 0.8rem;
+    border: 1px solid #BEEBE9;
+}
