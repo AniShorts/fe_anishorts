@@ -3,6 +3,7 @@ import className from "classnames/bind";
 import styles from "./Introduce.module.scss"
 import ReactPlayer from "react-player";
 import { useNavigate } from 'react-router-dom'
+import { KakaoBt, Dash } from 'component/Login';
 
 const Intro = () => {
   const cx = className.bind(styles);
@@ -23,11 +24,11 @@ const Intro = () => {
         // onEnded={() => handleVideo()}  // 플레이어 끝났을 때 이벤트
         />
       </div>
-      <div className='sort'>
-        {/* <KakaoBt name="카카오로 빠르게 시작하기"/> */}
+      <div className={cx('sort')}>
+        <KakaoBt name="카카오로 빠르게 시작하기"/>
       </div>
-      {/* <Dash title="또는" /> */}
-      <div className='login-sort'>
+      <Dash title="또는" />
+      <div className={cx('login-sort')}>
         <p onClick={() => { navigate(`/signup`) }}>회원가입</p>
         <p>|</p>
         <p onClick={() => { navigate(`/signin`) }}>ID로 로그인</p>
