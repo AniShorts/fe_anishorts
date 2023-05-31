@@ -1,5 +1,5 @@
 import className from "classnames/bind";
-import { Footer } from "../../component/Footer/Footer";
+import { Footer } from "component/Footer/Footer";
 import { useState } from "react";
 import styles from "./Main.module.scss";
 
