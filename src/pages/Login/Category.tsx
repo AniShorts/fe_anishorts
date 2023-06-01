@@ -36,8 +36,8 @@ const Void = (a : any) => {
     setTest([...test, a])
 }
 
-console.log(test);
-// console.log(useRecoilValue(userData));
+// console.log(test);
+// // console.log(useRecoilValue(userData));
 
 
 return (
