@@ -21,8 +21,6 @@ const SignIn: React.FC = () => {
         pattern: { value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/, message: "특수문자와 숫자를 포함해주세요" },
     };
 
-    console.log(watch("nickname"));
-
     return (
         <>
             <Header title="로그인" />
