@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form'
 import className from "classnames/bind";
 import styles from "../../pages/Login/SignIn.module.scss"
 import { loginApi } from 'apis'
+import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
     const cx = className.bind(styles);
+    const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm({});
 
     const nicknameOpt = {
@@ -21,10 +23,18 @@ const SignIn: React.FC = () => {
         pattern: { value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/, message: "특수문자와 숫자를 포함해주세요" },
     };
 
+    const WaitLogin = async (data : any) => {
+        const answer = await loginApi.login(data);
+        console.log(answer);
+        if (answer) {
+            navigate(`/main`);
+        }
+    }
+
     return (
         <>
             <Header title="로그인" />
-            <form onSubmit={handleSubmit((data) => { loginApi.login(data) })}>
+            <form onSubmit={handleSubmit((data) => WaitLogin(data))}>
                 <p className={cx('title')}>아이디</p>
                 <div className={cx('sort')}>
                     <input placeholder='아이디를 입력해주세요'
