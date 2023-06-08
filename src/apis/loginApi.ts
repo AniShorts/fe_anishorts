@@ -2,12 +2,16 @@ import axios from "axios";
 
 //로그인
 export const login = async (loginData : any) => {
+   const answer = { result: true };
     try {
       const res = await axios.post(process.env.REACT_APP_SERVER + 'users/login', loginData);
-      console.log(res);
+      localStorage.setItem("accessToken", res.data.token);
+      console.log(res.data.token);
     } catch (err) {
       console.log(err);
+      answer.result = false;
     }
+    return answer
 };
 
 //회원가입
