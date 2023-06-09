@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 import className from "classnames/bind";
 import styles from "./Category.module.scss";
-import { getCategory } from "apis/loginApi";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userData } from "recoil/atom";
+import { loginApi } from 'apis'
 
 const Category: React.FC = () => {
 const cx = className.bind(styles);
+const navigate = useNavigate();
 
 const [animal, setAnimal] = useState([
     { id: 1, name: "강아지" },
@@ -20,6 +22,9 @@ const [animal, setAnimal] = useState([
     { id: 9, name: "파이리" },
 ]);
 
+const [test2, setTest2] = useState({category1:[
+
+]})
 const [add, setAdd] = useRecoilState(userData);
 
 const [test, setTest] = useState([{
@@ -29,12 +34,20 @@ const [test, setTest] = useState([{
 
 
 useEffect(() => {
-    getCategory();
+    loginApi.getCategory();
 }, [])
 
 const Void = (a : any) => {
+    console.log(a);
+    
     setTest([...test, a])
 }
+
+const Selected = Object
+
+console.log(add);
+const example = {}
+
 
 return (
     <>
@@ -56,7 +69,7 @@ return (
             })}
         </div>
         <div className={cx('sort')}>
-            <button className={cx('btn')}>선택 완료</button>
+            <button onClick={()=> {loginApi.signup(example); navigate(`/main`)}} className={cx('btn')}>선택 완료</button>
         </div>
     </>
 )
