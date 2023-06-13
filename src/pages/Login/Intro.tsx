@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { useNavigate } from 'react-router-dom'
 import { KakaoBt, Dash } from 'component/Login';
 
-const Intro = () => {
+const Intro : React.FC = () => {
   const cx = className.bind(styles);
   const navigate = useNavigate();
 
