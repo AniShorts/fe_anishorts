@@ -1,4 +1,3 @@
-import React from 'react'
 import className from "classnames/bind";
 import styles from "../../pages/Login/Introduce.module.scss"
 import { MdArrowBackIosNew } from 'react-icons/md';
