@@ -22,9 +22,6 @@ const [animal, setAnimal] = useState([
     { id: 9, name: "파이리" },
 ]);
 
-const [test2, setTest2] = useState({category1:[
-
-]})
 const [add, setAdd] = useRecoilState(userData);
 
 const [test, setTest] = useState([{
