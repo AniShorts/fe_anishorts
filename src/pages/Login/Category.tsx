@@ -40,9 +40,9 @@ const Void = (a : any) => {
     setTest([...test, a])
 }
 
-const Selected = Object
+// const Selected = Object
+// console.log(add);
 
-console.log(add);
 const example = {}
 
 
