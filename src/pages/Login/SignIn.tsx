@@ -23,6 +23,7 @@ const SignIn: React.FC = () => {
         pattern: { value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/, message: "특수문자와 숫자를 포함해주세요" },
     };
 
+    //로그인 api
     const WaitLogin = async (data : any) => {
         const answer = await loginApi.login(data);
         console.log(answer);
