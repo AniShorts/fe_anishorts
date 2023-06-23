@@ -29,22 +29,17 @@ const [test, setTest] = useState([{
 }])
 
 
-
 useEffect(() => {
     loginApi.getCategory();
 }, [])
 
-const Void = (a : any) => {
-    console.log(a);
+// const Void = (a : any) => {
+//     console.log(a);
     
-    setTest([...test, a])
-}
-
-// const Selected = Object
-// console.log(add);
+//     setTest([...test, a])
+// }
 
 const example = {}
-
 
 return (
     <>
