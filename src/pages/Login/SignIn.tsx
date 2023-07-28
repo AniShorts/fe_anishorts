@@ -3,7 +3,7 @@ import { Header } from 'component/Login'
 import { useForm } from 'react-hook-form'
 import className from "classnames/bind";
 import styles from "../../pages/Login/SignIn.module.scss"
-import { loginApi } from 'apis'
+import { loginApi } from 'apis/loginApi';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
@@ -25,13 +25,12 @@ const SignIn: React.FC = () => {
 
     //로그인 api
     const WaitLogin = async (data : any) => {
-        const answer = await loginApi.login(data);
+        const answer = await loginApi(data);
         console.log(answer);
         if (answer) {
-            navigate(`/main`);
+            // navigate(`/main`);
         }
     }
-
     return (
         <>
             <Header title="로그인" />

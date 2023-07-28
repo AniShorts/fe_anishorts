@@ -1,12 +1,12 @@
-import axios from "axios";
+import instance from "apis";
 
 //로그인
-export const login = async (loginData : any) => {
+export const loginApi = async (loginData : any) => {
    const answer = { result: true };
     try {
-      const res = await axios.post(process.env.REACT_APP_SERVER + 'users/login', loginData);
-      localStorage.setItem("accessToken", res.data.token);
-      console.log(res.data.token);
+      const res = await instance.post(process.env.REACT_APP_SERVER + 'users/login', loginData);
+      localStorage.setItem("accessToken", res.data.access);
+      console.log(res.data.access);
     } catch (err) {
       console.log(err);
       answer.result = false;
@@ -15,9 +15,9 @@ export const login = async (loginData : any) => {
 };
 
 //회원가입
-export const signup = async (userData : any) => {
+export const signupApi = async (userData : any) => {
   try {
-    const res = await axios.post(process.env.REACT_APP_SERVER + 'users/signup', userData);
+    const res = await instance.post(process.env.REACT_APP_SERVER + 'users/signup', userData);
     console.log(res);
   } catch (err) {
     console.log(err);
@@ -25,9 +25,9 @@ export const signup = async (userData : any) => {
 };
 
 //닉네임 중복 확인
-export const dupcheck = async (nickname : any) => {
+export const dupcheckApi = async (nickname : any) => {
     try {
-      const res = await axios.post(process.env.REACT_APP_SERVER + 'users/checkNickname', nickname);
+      const res = await instance.post(process.env.REACT_APP_SERVER + 'users/checkNickname', nickname);
       alert('성공')
       console.log(res);
     } catch (err) {
@@ -36,9 +36,9 @@ export const dupcheck = async (nickname : any) => {
 };
 
 //카테고리 Get 요청
-export const getCategory = async () => {
+export const getCategoryApi = async () => {
   try {
-    const res = await axios.get(process.env.REACT_APP_SERVER + 'categorylist')
+    const res = await instance.get(process.env.REACT_APP_SERVER + 'categorylist')
     console.log(res);
   } catch (err) {
     console.log(err);
