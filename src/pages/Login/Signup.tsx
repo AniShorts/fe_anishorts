@@ -3,14 +3,12 @@ import className from "classnames/bind";
 import styles from "../../pages/Login/SignIn.module.scss"
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-
 import { useRecoilState } from 'recoil';
 import { userData } from 'recoil/atom';
 import { Header } from 'component/Login'
-import { loginApi } from 'apis'
+import { dupcheckApi } from 'apis/loginApi';
 
 const Signup: React.FC = () => {
-
   type FormInputs = {
     nickname: string;
     password: string;
@@ -18,6 +16,7 @@ const Signup: React.FC = () => {
     email: string;
     emailConfirm: string;
   };
+  const accessToken = localStorage.getItem("accessToken");
 
   const { register, getValues, handleSubmit, setError, formState: { errors } } = useForm<FormInputs>();
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const Signup: React.FC = () => {
       setError(type, { message: "다시 확인해주세요" }, { shouldFocus: true });
       console.log(type);
     } else {
-      loginApi.dupcheck(data);
+      dupcheckApi(data);
     }
   };
 
