@@ -15,9 +15,11 @@ export const loginApi = async (loginData : any) => {
 };
 
 //회원가입
-export const signupApi = async (userData : any) => {
+export const signupApi = async (category: any, user : any) => {
+
   try {
-    const res = await instance.post(process.env.REACT_APP_SERVER + 'users/signup', userData);
+    console.log(category);
+    const res = await instance.post(process.env.REACT_APP_SERVER + 'users/signup', category);
     console.log(res);
   } catch (err) {
     console.log(err);
