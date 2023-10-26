@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import className from "classnames/bind";
 import styles from "./Category.module.scss";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userData } from "recoil/atom";
 import { getCategoryApi, signupApi } from "apis/loginApi";
 
 const Category: React.FC = () => {
     const cx = className.bind(styles);
     const navigate = useNavigate();
-    type Test = { id: number, name: string };
+    type ICategory = { id: number, name: string };
 
+    const user = useRecoilValue(userData);
     let select: any = { "category": []}
     const [animal, setAnimal] = useState([
         { id: 1, name: "강아지" },
@@ -23,22 +24,17 @@ const Category: React.FC = () => {
         { id: 8, name: "피카츄" },
         { id: 9, name: "파이리" },
     ]);
-    const [user, setUSer] = useRecoilState(userData);
-    console.log(user);
-    console.log(select);
-
 
     //선택한거 추가하기
-    const Plus = (animal: Test) => {
-        if (select.category.some((el: Test) => el.id === animal.id)) {
-            select.category = select.category.filter((el: Test) => el.id !== animal.id);
+    const Plus = (animal: ICategory) => {
+        if (select.category.some((el: ICategory) => el.id === animal.id)) {
+            select.category = select.category.filter((el: ICategory) => el.id !== animal.id);
         } else {
             select.category.push(animal);
         }   
     }
-
     useEffect(() => {
-        // getCategoryApi();
+        getCategoryApi();
     }, [])
 
     return (
