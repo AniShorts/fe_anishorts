@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import className from "classnames/bind";
-import styles from "./Introduce.module.scss"
+import styles from "./Intro.module.scss"
 import ReactPlayer from "react-player";
 import { useNavigate } from 'react-router-dom'
 import { KakaoBt, Dash } from 'component/Login';
