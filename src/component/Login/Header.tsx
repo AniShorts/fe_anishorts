@@ -1,5 +1,5 @@
 import className from "classnames/bind";
-import styles from "../../pages/Login/Introduce.module.scss"
+import styles from "../../pages/Login/Intro.module.scss"
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
