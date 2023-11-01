@@ -1,5 +1,58 @@
 @import "../../../public/scss/styles.scss";
 
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.illustImage {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    :first-child {
+        width: 36rem;
+        height: 37.8rem;
+        object-fit: contain;
+        margin-top: 5.7rem;
+        padding-left: 3.6rem;
+        z-index: -1;
+    }   
+}
+
+.sloganImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+
+    :first-child {
+        width: 30.2rem;
+        height: 2.1 5rem;
+        object-fit: contain;
+    }
+}
+
+.textBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 4rem;
+    justify-content: center;
+    margin-top: 3rem;
+    
+    font-size: 1.5rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1d1d1d;
+    .boldText {
+        font-weight: 600;
+    }
+}
+
 
 .header {
     display: flex;
@@ -11,55 +64,48 @@
     font-weight: bold;
     padding-left: 1.4rem;
     margin-bottom: 2rem;
-
     :first-child {
         margin-right: 0.8rem;
-        
     }
     :last-child {
         font-size: 1.6rem;
     }
 }
-
 .sort {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.video_sort {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    margin-top: 7rem;
+    gap: 1.2rem;
 }
 
-.kakao-bt {
-    @include view("mobile") {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        width: 34rem;
-        height: 3.5rem;
-        border-radius: 0.8rem;
-        background-color: rgb(254, 229, 0);
-        border-color: rgb(254, 229, 0);
-        font-size: 1.4rem;
-        font-weight: bolder;
+// .kakao-bt {
+//     @include view("mobile") {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         position: relative;
+//         width: 34rem;
+//         height: 3.5rem;
+//         border-radius: 0.8rem;
+//         background-color: rgb(254, 229, 0);
+//         border-color: rgb(254, 229, 0);
+//         font-size: 1.4rem;
+//         font-weight: bolder;
         
-        margin: 5rem 0 1rem 0;
+//         margin: 5rem 0 1rem 0;
     
-        :first-child {
-            display: flex;
-            position: absolute;
-            left: 0.8rem;
-            top: 0.45rem;
+//         :first-child {
+//             display: flex;
+//             position: absolute;
+//             left: 0.8rem;
+//             top: 0.45rem;
     
-            font-size: 1.8rem;
-        }
-    }
-}
+//             font-size: 1.8rem;
+//         }
+//     }
+// }
 
 .line {
     display: flex;
@@ -86,20 +132,4 @@
     height: 0.1rem;
     font-size: 0;
     line-height: 0;
-}
-.login-sort {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin : 2.4rem 0 3rem 1.4rem;
-    color: rgb(107, 114, 128);
-    font-size: 1.4rem;
-    font-weight: 400;
-
-    :first-child {
-        margin-right: 1rem;
-    }
-    :last-child {
-        margin-left: 1.6rem;
-    }
 }
