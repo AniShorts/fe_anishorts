@@ -1,0 +1,47 @@
+@import "../../../public/scss/styles.scss";
+
+.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.purpleBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 31.5rem;
+    padding: 2rem 0;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #a97dff;
+    color: #fff;
+}
+
+.whiteBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 31.5rem;
+    height: 6rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    border-radius: 0.5rem;
+    border: solid 2px #a87dff;
+    background-color: #fff;
+}

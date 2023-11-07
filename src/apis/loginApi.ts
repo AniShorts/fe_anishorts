@@ -15,9 +15,9 @@ export const loginApi = async (loginData : any) => {
 };
 
 //회원가입
-export const signupApi = async (userData : any) => {
+export const signupApi = async ([category, user]: any) => {
   try {
-    const res = await instance.post(process.env.REACT_APP_SERVER + 'users/signup', userData);
+    const res = await instance.post(process.env.REACT_APP_SERVER + 'users/signup', [{...category, ...user}]);
     console.log(res);
   } catch (err) {
     console.log(err);

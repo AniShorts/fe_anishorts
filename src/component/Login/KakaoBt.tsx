@@ -1,5 +1,5 @@
 import className from "classnames/bind";
-import styles from "../../pages/Login/Introduce.module.scss"
+import styles from "../../pages/Login/Intro.module.scss"
 import { RiKakaoTalkFill } from 'react-icons/ri';
 
 const KakaoBt = (props : {name : string} ) => {
