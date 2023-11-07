@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'component/Login'
+import { Btn, Header } from 'component/Login'
 import { useForm } from 'react-hook-form'
 import className from "classnames/bind";
 import styles from "../../pages/Login/SignIn.module.scss"
@@ -24,18 +24,53 @@ const SignIn: React.FC = () => {
     };
 
     //로그인 api
-    const WaitLogin = async (data : any) => {
-        const answer = await loginApi(data);
-        console.log(answer);
-        if (answer) {
-            // navigate(`/main`);
-        }
+    const WaitLogin = async (data: any) => {
+        console.log(data);
+
+        // const answer = await loginApi(data);
+        // console.log(answer);
+        // if (answer) {
+        //     navigate(`/main`);
+        // }
     }
     return (
         <>
-            <Header title="로그인" />
-            <form onSubmit={handleSubmit((data) => WaitLogin(data))}>
-                <p className={cx('title')}>아이디</p>
+            <form className={cx("container")} onSubmit={handleSubmit((data) => WaitLogin(data))}>
+                <div className={cx("backImg")} />
+                <div className={cx("formWrap")}>
+                    <div className={cx("idWrap")}>
+                        <span>
+                            <span className={cx("boldText")}>아이디</span>를
+                            <span className={cx("boldText")}>입력</span>하세요.
+                        </span>
+                        <input
+                            {...register("nickname", nicknameOpt)}
+                        />
+                        {!errors.nickname?.message &&<span className={cx('test')} />}
+                    </div>
+                    <span><span className={cx("boldText")}>비밀번호</span>를 <span className={cx("boldText")}>입력</span>하세요.</span>
+                    <input
+                        type='password'
+                        {...register("password", pwOpt)}
+                    />
+                     {!errors.password?.message && <span className={cx('test')} />}
+                </div>
+                {errors.nickname?.message && <span className={cx('errorText')}>{errors?.email?.toString()}</span> || errors.password?.message && <span className={cx('errorText')}>비밀번호 형식이 맞지않습니다</span>}
+                <div className={cx("wrap")}>
+                    <Btn title='로그인' nav='asd' />
+                    <Btn title='카카오톡으로 빠른 로그인' nav='asd'/>
+                </div>
+                <div className={cx('findBox')}>
+                    <span onClick={() => { navigate(`/signup`) }}>아이디 찾기</span>
+                    <span>|</span>
+                    <span onClick={() => { navigate(`/signin`) }}>비밀번호 변경</span>
+                </div>
+            </form>
+
+
+
+            {/*  <form className={cx("container")} onSubmit={handleSubmit((data) => WaitLogin(data))}>
+               <p className={cx('title')}>아이디</p>
                 <div className={cx('sort')}>
                     <input placeholder='아이디를 입력해주세요'
                         className={cx('customInput')} {...register("nickname", nicknameOpt)} />
@@ -51,7 +86,8 @@ const SignIn: React.FC = () => {
                 <div className={cx('sort')}>
                     <button className={cx('btn')}>로그인</button>
                 </div>
-            </form>
+
+            </form>*/}
         </>
     )
 }
