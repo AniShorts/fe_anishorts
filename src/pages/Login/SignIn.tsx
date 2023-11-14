@@ -25,8 +25,6 @@ const SignIn: React.FC = () => {
 
     //로그인 api
     const WaitLogin = async (data: any) => {
-        console.log(data);
-
         // const answer = await loginApi(data);
         // console.log(answer);
         // if (answer) {
