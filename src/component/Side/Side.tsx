@@ -1,30 +1,37 @@
 import className from "classnames/bind";
 import styles from "./Side.module.scss";
-import { BsHandThumbsUpFill, BsHandThumbsUp } from "react-icons/bs";
-import { MdModeComment } from "react-icons/md";
-import { Dispatch, SetStateAction, useState } from "react";
 
 const cx = className.bind(styles);
 
 type Props = {
   like: boolean;
-  setCommentModalVisible: Dispatch<SetStateAction<boolean>>;
-  setLike: React.Dispatch<React.SetStateAction<boolean>>;
+  clickHandle: (kind: "like" | "comment" | "more") => void;
 };
 
-export function Side({ like, setCommentModalVisible, setLike }: Props) {
+export function Side({ like, clickHandle }: Props) {
+  const onClickHandle = (kind: "like" | "comment" | "more") => {
+    clickHandle(kind);
+  };
   return (
     <div className={cx("container")}>
       <div className={cx("wrap")}>
-        {like ? (
-          <BsHandThumbsUpFill
-            style={{ color: "purple" }}
-            onClick={() => setLike(!like)}
-          />
-        ) : (
-          <BsHandThumbsUp onClick={() => setLike(!like)} />
-        )}
-        <MdModeComment onClick={() => setCommentModalVisible(true)} />
+        <img
+          onClick={() => onClickHandle("like")}
+          src={`/images/icon/heart${like ? "_able" : ""}.png`}
+          style={{ width: "31.3px" }}
+        />
+        <div>7.6만</div>
+        <img
+          onClick={() => onClickHandle("comment")}
+          src="/images/icon/chatting.png"
+          style={{ width: "31.3px", marginTop: "20px" }}
+        />
+        <div>656</div>
+        <img
+          onClick={() => onClickHandle("more")}
+          src="/images/icon/etc.png"
+          style={{ width: "20.3px", marginTop: "21.8px" }}
+        />
       </div>
     </div>
   );
