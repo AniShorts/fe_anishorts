@@ -10,11 +10,12 @@ import { useDoubleTap } from "use-double-tap";
 import { FooterKind } from "@utils/types/footerKind";
 import { v4 as uuidv4 } from "uuid";
 import { motion, AnimatePresence } from "framer-motion";
+import { DetailModal } from "component/Main/DetailModal/DetailModal";
 
 const cx = className.bind(styles);
 
 const Main = () => {
-  const bindPress = useLongPress((e) => {
+  const bindPress = useLongPress(() => {
     setPress(!press);
   });
 
@@ -27,14 +28,15 @@ const Main = () => {
   };
 
   const bindClick = useDoubleTap(
-    (e) => {
+    () => {
       onDoubleClickHandle();
     },
     300,
     { onSingleTap: onClickHandle }
   );
 
-  const [more, setMore] = useState(false);
+  const [moreComment, setMoreComment] = useState(false);
+  const [datailModalVisible, detailModalVisible] = useState(false);
   const [commentModalVisible, setCommentModalVisible] =
     useState<boolean>(false);
   const [bottomModalVisible, setBottomModalVisible] = useState<boolean>(false);
@@ -72,7 +74,6 @@ const Main = () => {
 
   const [ableId, setAbleId] = useState<HTMLElement>();
   const [ableIndex, setAbleIndex] = useState(0);
-
   const videoWrapRef = useRef<HTMLDivElement>(null);
 
   const [fixedScrollPosition, setFixedScrollPosition] = useState(0);
@@ -133,10 +134,9 @@ const Main = () => {
     }
   }, [ableId]);
 
-  const [moreComment, setMoreComment] = useState(false);
-
   return (
     <div className={cx("container")}>
+      {datailModalVisible && <DetailModal />}
       <div className={cx("video_container")} ref={videoWrapRef}>
         {data.map((v, idx) => (
           <div
@@ -163,8 +163,6 @@ const Main = () => {
               </div>
               <motion.div
                 style={{
-                  overflow: moreComment ? "scroll" : "hidden",
-                  whiteSpace: moreComment ? "unset" : "nowrap",
                   fontWeight: "600",
                   fontSize: "16px",
                   textOverflow: "ellipsis",
@@ -178,6 +176,8 @@ const Main = () => {
                 onClick={() => setMoreComment((prev) => !prev)}
                 animate={{
                   height: moreComment ? 100 : 30,
+                  whiteSpace: moreComment ? "unset" : "nowrap",
+                  overflow: moreComment ? "scroll" : "hidden",
                 }}
                 transition={{ duration: 0.1 }}
               >
@@ -208,6 +208,7 @@ const Main = () => {
       <CommentModal
         visible={commentModalVisible}
         setCommentModalVisible={setCommentModalVisible}
+        detailModalVisible={detailModalVisible}
       />
       <BottomModal
         setBottomModalVisible={setBottomModalVisible}
