@@ -128,10 +128,17 @@ const Main = () => {
     }
   }, [ableId]);
 
+  const [moreComment, setMoreComment] = useState(false);
+
   return (
     <div className={cx("container")}>
       <div
-        style={{ width: "100%", height: "100%", overflow: "scroll" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          overflow: "scroll",
+          maxWidth: "500px",
+        }}
         ref={videoWrapRef}
       >
         {data.map((v, idx) => (
@@ -155,16 +162,60 @@ const Main = () => {
             <div
               style={{
                 position: "absolute",
-                bottom: "180px",
+                bottom: "85px",
                 color: "#fff",
-                left: "38px",
+                zIndex: 3,
+                width: "100%",
+                padding: "30px",
               }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div style={{ display: "flex" }}>
-                <div>{idx}</div>
-                <div>아이디</div>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: "18px",
+                  alignItems: "center",
+                  gap: "7px",
+                  marginBottom: "10px",
+                }}
+              >
+                <img src="/images/icon/profile.png" style={{ width: "37px" }} />
+                <div style={{ marginTop: "5px" }}>아이디</div>
               </div>
-              <div>코멘트</div>
+              <div
+                style={{
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  whiteSpace: moreComment ? "unset" : "nowrap",
+                  textOverflow: "ellipsis",
+                  overflow: moreComment ? "scroll" : "hidden",
+                  opacity: 0.7,
+                  width: "calc(100% - 23%)",
+                  cursor: "pointer",
+                  maxHeight: "30vh",
+                  paddingTop: "10px",
+                }}
+                onClick={() => setMoreComment((prev) => !prev)}
+              >
+                코멘트코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트코멘트코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트코멘트코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트코멘트 코멘트 코멘트코멘트코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트코멘트코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
+                코멘트
+              </div>
             </div>
             <Side like={like} clickHandle={SideClickHandle} />
           </div>

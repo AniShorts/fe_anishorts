@@ -16,11 +16,13 @@
 .video_wrap {
   position: relative;
   width: 100%;
+  max-width: 500px;
   height: 100%;
 }
 
 .wrap {
   width: 100%;
+  max-width: 500px;
   height: 100%;
   position: absolute;
   z-index: 2;

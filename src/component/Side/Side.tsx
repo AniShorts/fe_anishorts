@@ -13,7 +13,7 @@ export function Side({ like, clickHandle }: Props) {
     clickHandle(kind);
   };
   return (
-    <div className={cx("container")}>
+    <div onClick={(e) => e.stopPropagation()} className={cx("container")}>
       <div className={cx("wrap")}>
         <img
           onClick={() => onClickHandle("like")}
