@@ -9,6 +9,7 @@ import { useLongPress } from "use-long-press";
 import { useDoubleTap } from "use-double-tap";
 import { FooterKind } from "@utils/types/footerKind";
 import { v4 as uuidv4 } from "uuid";
+import { motion, AnimatePresence } from "framer-motion";
 
 const cx = className.bind(styles);
 
@@ -50,6 +51,10 @@ const Main = () => {
   const SideClickHandle = (kind: "like" | "comment" | "more") => {
     if (kind === "like") {
       setLike((prev) => !prev);
+    } else if (kind === "comment") {
+      setCommentModalVisible((prev) => !prev);
+    } else {
+      setBottomModalVisible((prev) => !prev);
     }
   };
   const FooterHandle = (kind: FooterKind) => {
@@ -132,15 +137,7 @@ const Main = () => {
 
   return (
     <div className={cx("container")}>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          overflow: "scroll",
-          maxWidth: "500px",
-        }}
-        ref={videoWrapRef}
-      >
+      <div className={cx("video_container")} ref={videoWrapRef}>
         {data.map((v, idx) => (
           <div
             {...bindClick}
@@ -159,43 +156,30 @@ const Main = () => {
               controls={false}
             />
             <div {...bindPress()} className={cx("wrap")} />
-            <div
-              style={{
-                position: "absolute",
-                bottom: "85px",
-                color: "#fff",
-                zIndex: 3,
-                width: "100%",
-                padding: "30px",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  fontSize: "18px",
-                  alignItems: "center",
-                  gap: "7px",
-                  marginBottom: "10px",
-                }}
-              >
-                <img src="/images/icon/profile.png" style={{ width: "37px" }} />
-                <div style={{ marginTop: "5px" }}>아이디</div>
+            <div className={cx("profile")} onClick={(e) => e.stopPropagation()}>
+              <div className={cx("my_info")}>
+                <img src="/images/icon/profile.png" />
+                <div>아이디</div>
               </div>
-              <div
+              <motion.div
                 style={{
+                  overflow: moreComment ? "scroll" : "hidden",
+                  whiteSpace: moreComment ? "unset" : "nowrap",
                   fontWeight: "600",
                   fontSize: "16px",
-                  whiteSpace: moreComment ? "unset" : "nowrap",
                   textOverflow: "ellipsis",
-                  overflow: moreComment ? "scroll" : "hidden",
-                  opacity: 0.7,
                   width: "calc(100% - 23%)",
                   cursor: "pointer",
                   maxHeight: "30vh",
                   paddingTop: "10px",
+                  color: "#eee9e9",
+                  transition: "height 0.3s",
                 }}
                 onClick={() => setMoreComment((prev) => !prev)}
+                animate={{
+                  height: moreComment ? 100 : 30,
+                }}
+                transition={{ duration: 0.1 }}
               >
                 코멘트코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
                 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
@@ -215,15 +199,20 @@ const Main = () => {
                 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
                 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트 코멘트
                 코멘트
-              </div>
+              </motion.div>
             </div>
             <Side like={like} clickHandle={SideClickHandle} />
           </div>
         ))}
       </div>
-      {commentModalVisible && (
-        <CommentModal setCommentModalVisible={setCommentModalVisible} />
-      )}
+      <CommentModal
+        visible={commentModalVisible}
+        setCommentModalVisible={setCommentModalVisible}
+      />
+      <BottomModal
+        setBottomModalVisible={setBottomModalVisible}
+        visible={bottomModalVisible}
+      />
       <Footer played={played} FooterHandle={FooterHandle} />
     </div>
   );
