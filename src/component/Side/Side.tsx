@@ -6,11 +6,11 @@ const cx = className.bind(styles);
 
 type Props = {
   like: boolean;
-  clickHandle: (kind: "like" | "comment" | "more") => void;
+  clickHandle: (kind: "like" | "comment" | "bottom") => void;
 };
 
 export function Side({ like, clickHandle }: Props) {
-  const onClickHandle = (kind: "like" | "comment" | "more") => {
+  const onClickHandle = (kind: "like" | "comment" | "bottom") => {
     clickHandle(kind);
   };
   return (
@@ -32,7 +32,7 @@ export function Side({ like, clickHandle }: Props) {
         <div>656</div>
         <motion.img
           whileTap={{ scale: 1.5 }}
-          onClick={() => onClickHandle("more")}
+          onClick={() => onClickHandle("bottom")}
           src="/images/icon/etc.png"
           style={{ width: "20.3px", marginTop: "21.8px" }}
         />

@@ -16,7 +16,7 @@
 }
 
 .wrap {
-  background-color: rgb(159, 46, 50);
+  background-color: #a97dff;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
@@ -25,4 +25,7 @@
   align-items: center;
   line-height: 1.2;
   cursor: pointer;
+  &:hover {
+    background-color: #b99af9;
+  }
 }

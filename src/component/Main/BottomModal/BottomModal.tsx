@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
-  setBottomModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  modalHandle: (type: "bottom", visible: boolean) => void;
   visible: boolean;
 };
 
-export function BottomModal({ setBottomModalVisible, visible }: Props) {
+export function BottomModal({ modalHandle, visible }: Props) {
   const ButtonStyle = {
     width: "100%",
     height: "calc(33% - 5px)",
@@ -23,7 +23,7 @@ export function BottomModal({ setBottomModalVisible, visible }: Props) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          onClick={() => setBottomModalVisible(false)}
+          onClick={() => modalHandle("bottom", false)}
           initial={{
             opacity: visible ? 0 : 1,
             y: 20,

@@ -13,10 +13,10 @@ type Arr = {
 
 type Props = {
   played: any;
-  FooterHandle: (kind: FooterKind) => void;
+  clickHandle: (kind: FooterKind) => void;
 };
 
-export function Footer({ played, FooterHandle }: Props) {
+export function Footer({ played, clickHandle }: Props) {
   const [arr] = useState<Arr[]>([
     { title: "홈", src: "home" },
     { title: "검색", src: "search" },
@@ -28,7 +28,7 @@ export function Footer({ played, FooterHandle }: Props) {
 
   const onClickHandle = (kind: FooterKind) => {
     setAbleItem(kind);
-    FooterHandle(kind);
+    clickHandle(kind);
   };
   return (
     <div className={cx("container")}>

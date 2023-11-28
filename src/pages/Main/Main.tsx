@@ -9,12 +9,28 @@ import { useLongPress } from "use-long-press";
 import { useDoubleTap } from "use-double-tap";
 import { FooterKind } from "@utils/types/footerKind";
 import { v4 as uuidv4 } from "uuid";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { DetailModal } from "component/Main/DetailModal/DetailModal";
+
+type Data = {
+  id: string;
+  like: boolean;
+};
 
 const cx = className.bind(styles);
 
 const Main = () => {
+  const [mute, setMute] = useState(true);
+  const [like, setLike] = useState(false);
+  const [press, setPress] = useState(false);
+  const [played, setPlayed] = useState(0);
+
+  const [moreComment, setMoreComment] = useState(false);
+  const [datailModalVisible, setDetailModalVisible] = useState(false);
+  const [commentModalVisible, setCommentModalVisible] =
+    useState<boolean>(false);
+  const [bottomModalVisible, setBottomModalVisible] = useState<boolean>(false);
+
   const bindPress = useLongPress(() => {
     setPress(!press);
   });
@@ -24,7 +40,18 @@ const Main = () => {
   };
 
   const onDoubleClickHandle = () => {
-    setLike(!like);
+    setData((prev) => {
+      return prev.map((v) => {
+        if (v.id === ableId?.id) {
+          return {
+            ...v,
+            like: !v.like,
+          };
+        } else {
+          return v;
+        }
+      });
+    });
   };
 
   const bindClick = useDoubleTap(
@@ -35,43 +62,59 @@ const Main = () => {
     { onSingleTap: onClickHandle }
   );
 
-  const [moreComment, setMoreComment] = useState(false);
-  const [datailModalVisible, detailModalVisible] = useState(false);
-  const [commentModalVisible, setCommentModalVisible] =
-    useState<boolean>(false);
-  const [bottomModalVisible, setBottomModalVisible] = useState<boolean>(false);
-  const [mute, setMute] = useState(true);
-  const [like, setLike] = useState(false);
-  const [press, setPress] = useState(false);
-
-  const [played, setPlayed] = useState(0);
-
   const handleProgress = (state: any) => {
     setPlayed(state.played);
   };
 
-  const SideClickHandle = (kind: "like" | "comment" | "more") => {
+  const SideClickHandle = (kind: "like" | "comment" | "bottom") => {
     if (kind === "like") {
-      setLike((prev) => !prev);
-    } else if (kind === "comment") {
-      setCommentModalVisible((prev) => !prev);
-    } else {
+      setData((prev) => {
+        return prev.map((v) => {
+          if (v.id === ableId?.id) {
+            return {
+              ...v,
+              like: !v.like,
+            };
+          } else {
+            return v;
+          }
+        });
+      });
+    } else if (kind === "bottom") {
       setBottomModalVisible((prev) => !prev);
+    } else {
+      setCommentModalVisible((prev) => !prev);
     }
   };
   const FooterHandle = (kind: FooterKind) => {
     console.log(kind);
   };
 
-  const [data] = useState([
-    { id: uuidv4() },
-    { id: uuidv4() },
-    { id: uuidv4() },
-    { id: uuidv4() },
-    { id: uuidv4() },
-    { id: uuidv4() },
+  const modalHandle = (
+    kind: "comment" | "bottom" | "detail",
+    visible: boolean
+  ) => {
+    if (kind === "comment") {
+      setCommentModalVisible(visible);
+    } else if (kind === "bottom") {
+      setBottomModalVisible(visible);
+    } else if (kind === "detail") {
+      setDetailModalVisible(visible);
+    } else {
+      setMoreComment(visible);
+    }
+  };
+
+  const [data, setData] = useState<Data[]>([
+    { id: uuidv4(), like: true },
+    { id: uuidv4(), like: false },
+    { id: uuidv4(), like: false },
+    { id: uuidv4(), like: false },
+    { id: uuidv4(), like: false },
+    { id: uuidv4(), like: false },
   ]);
 
+  // 스크롤 관련
   const [ableId, setAbleId] = useState<HTMLElement>();
   const [ableIndex, setAbleIndex] = useState(0);
   const videoWrapRef = useRef<HTMLDivElement>(null);
@@ -125,6 +168,7 @@ const Main = () => {
   }, [scrollPosition]);
 
   useEffect(() => {
+    setMoreComment(false);
     const targetElement = document.getElementById(data[ableIndex].id);
     if (targetElement) {
       setAbleId(targetElement);
@@ -136,7 +180,7 @@ const Main = () => {
 
   return (
     <div className={cx("container")}>
-      {datailModalVisible && <DetailModal />}
+      {datailModalVisible && <DetailModal modalHandle={modalHandle} />}
       <div className={cx("video_container")} ref={videoWrapRef}>
         {data.map((v, idx) => (
           <div
@@ -175,9 +219,11 @@ const Main = () => {
                 }}
                 onClick={() => setMoreComment((prev) => !prev)}
                 animate={{
-                  height: moreComment ? 100 : 30,
-                  whiteSpace: moreComment ? "unset" : "nowrap",
-                  overflow: moreComment ? "scroll" : "hidden",
+                  height: moreComment && v.id === ableId?.id ? "100px" : "30px",
+                  whiteSpace:
+                    moreComment && v.id === ableId?.id ? "unset" : "nowrap",
+                  overflow:
+                    moreComment && v.id === ableId?.id ? "scroll" : "hidden",
                 }}
                 transition={{ duration: 0.1 }}
               >
@@ -201,20 +247,13 @@ const Main = () => {
                 코멘트
               </motion.div>
             </div>
-            <Side like={like} clickHandle={SideClickHandle} />
+            <Side like={v.like} clickHandle={SideClickHandle} />
           </div>
         ))}
       </div>
-      <CommentModal
-        visible={commentModalVisible}
-        setCommentModalVisible={setCommentModalVisible}
-        detailModalVisible={detailModalVisible}
-      />
-      <BottomModal
-        setBottomModalVisible={setBottomModalVisible}
-        visible={bottomModalVisible}
-      />
-      <Footer played={played} FooterHandle={FooterHandle} />
+      <CommentModal visible={commentModalVisible} modalHandle={modalHandle} />
+      <BottomModal modalHandle={modalHandle} visible={bottomModalVisible} />
+      <Footer played={played} clickHandle={FooterHandle} />
     </div>
   );
 };
