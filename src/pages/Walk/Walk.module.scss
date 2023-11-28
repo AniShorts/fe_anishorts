@@ -1,0 +1,17 @@
+@import "../../../public/scss/styles.scss";
+
+.container {
+  width: 100vw;
+  max-width: 500px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+  border: solid 1px gray;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.wrap {
+}

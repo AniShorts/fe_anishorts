@@ -12,7 +12,7 @@ type Arr = {
 };
 
 type Props = {
-  played: any;
+  played?: any;
   clickHandle: (kind: FooterKind) => void;
 };
 
@@ -32,7 +32,7 @@ export function Footer({ played, clickHandle }: Props) {
   };
   return (
     <div className={cx("container")}>
-      <progress className={cx("progress")} value={played} />
+      {played && <progress className={cx("progress")} value={played} />}
       <div className={cx("wrap")}>
         {arr.map((v) => (
           <div

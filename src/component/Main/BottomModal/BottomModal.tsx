@@ -10,7 +10,7 @@ export function BottomModal({ modalHandle, visible }: Props) {
     width: "100%",
     height: "calc(33% - 5px)",
     borderRadius: "8px",
-    backgroundColor: "#d0c9c9",
+    backgroundColor: "#c6b0f4",
     fontWeight: "400",
     color: "#fff",
     display: "flex",

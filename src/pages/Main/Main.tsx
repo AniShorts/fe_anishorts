@@ -1,7 +1,7 @@
 import className from "classnames/bind";
 import { Footer } from "component/Footer";
 import { BottomModal, CommentModal } from "component/Main";
-import { Side } from "component/Side";
+import { Side } from "component/Main/Side";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Main.module.scss";
 import ReactPlayer from "react-player";
