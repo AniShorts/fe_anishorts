@@ -34,98 +34,115 @@ export function CommentModal({ visible, modalHandle }: Props) {
     {
       id: "1",
       nick_name: "dwadwadwadwad",
-      comment: "dwadwadawdwadwadwakjhdkwajdwa",
+      comment:
+        "dwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwadwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
     {
       id: "1",
       nick_name: "dwadwadwadwad",
       comment: "dwadwadawdwadwadwakjhdkwajdwa",
       url: "",
+      time: "10분전",
     },
   ]);
 
@@ -185,54 +202,42 @@ export function CommentModal({ visible, modalHandle }: Props) {
             <div style={{ overflow: "scroll" }}>
               {data.map((v) => (
                 <motion.div
-                  {...bindPress()}
+                  {...bindPress(v.id)}
                   style={{
                     display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "14px",
-                    padding: "15px 10px",
+                    fontSize: "16px",
+                    padding: "13px 22px",
                   }}
                   whileTap={{ backgroundColor: "#3333334a" }}
                 >
                   <img
-                    style={{ width: "40px", cursor: "pointer" }}
-                    src={v.url ? v.url : `/images/icon/profile.png`}
+                    style={{ height: "30px", cursor: "pointer" }}
+                    src={v.url ? v.url : "/images/icon/profile.png"}
                   />
                   <div
                     style={{
+                      margin: "auto 20px auto 10px",
+                      fontWeight: "600",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "10px",
+                      gap: "5px",
+                      width: "calc(100% - 60px)",
+                      wordBreak: "break-all",
                     }}
                   >
                     <div
                       style={{
                         display: "flex",
-                        gap: "15px",
+                        gap: "10px",
                         alignItems: "center",
                       }}
                     >
-                      <div
-                        style={{
-                          fontWeight: "700",
-                          cursor: "pointer",
-                          color: "#b898f9",
-                        }}
-                      >
-                        {v.nick_name}
-                      </div>
-                      <div
-                        style={{
-                          fontWeight: "500",
-                          cursor: "pointer",
-                          fontSize: "12px",
-                        }}
-                      >
-                        작성 시간
+                      <div style={{ cursor: "pointer" }}>{v.nick_name}</div>
+                      <div style={{ color: "#999494", fontSize: "13px" }}>
+                        {v.time}
                       </div>
                     </div>
-                    <div style={{ fontWeight: "500" }}>{v.comment}</div>
+                    <div>{v.comment}</div>
                   </div>
                 </motion.div>
               ))}

@@ -2,29 +2,26 @@ import className from "classnames/bind";
 import styles from "./Walk.module.scss";
 import { Footer } from "component/Footer";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import { motion } from "framer-motion";
 
 const cx = className.bind(styles);
 
 const Walk = () => {
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       nick_name: "룰라리",
-      content: "dawdwadwada",
-      src: "/images/icon/more.png",
+      id: uuidv4(),
+      content: "dawdwadwadadawdwadwadadawdwadwadadawdwadwada",
+      src: "/images/icon/walk.png",
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
     },
     {
       nick_name: "dwadaw",
-      content: "dawdwadwada",
-      src: "",
-      view_count: "22222222",
-      comment_count: "2222",
-      like: "222",
-    },
-    {
-      nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -33,6 +30,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -41,6 +39,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -49,6 +48,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -57,6 +57,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -65,6 +66,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -73,6 +75,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -81,6 +84,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -89,6 +93,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -97,6 +102,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -105,6 +111,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -113,6 +120,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -121,6 +129,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -129,6 +138,7 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -137,6 +147,16 @@ const Walk = () => {
     },
     {
       nick_name: "dwadaw",
+      id: uuidv4(),
+      content: "dawdwadwada",
+      src: "",
+      view_count: "22222222",
+      comment_count: "2222",
+      like: "222",
+    },
+    {
+      nick_name: "dwadaw",
+      id: uuidv4(),
       content: "dawdwadwada",
       src: "",
       view_count: "22222222",
@@ -145,188 +165,52 @@ const Walk = () => {
     },
   ]);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const onClickHandle = (id: string) => {
+    navigate(`${location.pathname}/${id}`);
+  };
+
   return (
     <div className={cx("container")}>
-      <div
-        style={{
-          backgroundColor: "#fff",
-          paddingBottom: "30px",
-          paddingTop: "55px",
-          minHeight: "207px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            style={{ width: "53vw", maxWidth: "250px", marginBottom: "40px" }}
-            src="/images/icon/post_logo.png"
-          />
+      <div className={cx("search_cotainer")}>
+        <div className={cx("logo_wrap")}>
+          <img className={cx("logo_img")} src="/images/icon/post_logo.png" />
         </div>
-        <div
-          style={{
-            display: "flex",
-            height: "44px",
-            gap: "20px",
-            justifyContent: "center",
-            alignItems: "center",
-            marginLeft: "10px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              borderRadius: "5px",
-              backgroundColor: "#f2f2f2",
-              padding: "10px",
-              gap: "10px",
-              width: "calc(100% - 100px)",
-            }}
-          >
+        <div className={cx("search_wrap")}>
+          <div className={cx("search_input")}>
             <div>
               <img
-                style={{
-                  width: "30px",
-                  marginTop: "-5px",
-                }}
+                className={cx("search_img")}
                 src="/images/icon/search_gray.png"
               />
             </div>
             <input
               placeholder="게시물 검색하기"
-              style={{
-                border: "none",
-                outline: "none",
-                backgroundColor: "transparent",
-                fontSize: "18px",
-                width: "100%",
-              }}
+              className={cx("seartch_input")}
             />
           </div>
-          <img
-            style={{ width: "40px", marginTop: "-13px", cursor: "pointer" }}
-            src="/images/icon/note.png"
-          />
+          <img className={cx("note_img")} src="/images/icon/note.png" />
         </div>
       </div>
-      <div style={{ height: "100%" }}>
-        <div
-          style={{
-            display: "flex",
-            padding: "26px 30px 14px 35px",
-            justifyContent: "space-between",
-            backgroundColor: "#fff",
-            borderBottom: "solid 2px #f2f2f2",
-            whiteSpace: "nowrap",
-            fontSize: "11px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "25px",
-              fontWeight: "700",
-            }}
-          >
-            POST
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "5px",
-              cursor: "pointer",
-              marginTop: "3px",
-            }}
-          >
-            <div>최신순</div>
-            <img
-              style={{ height: "7px", marginTop: "1.5px" }}
-              src="/images/icon/down.png"
-            />
-          </div>
-        </div>
-        <div
-          style={{
-            height: "calc(100% - 378px)",
-            overflow: "scroll",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2px",
-            borderBottom: "solid 2px #f2f2f2",
-          }}
-        >
+      <div className={cx("label")}>
+        <div className={cx("label_body")}>POST</div>
+        <div className={cx("body")}>
           {data.map((v) => (
-            <div
-              style={{
-                display: "flex",
-                minHeight: "84px",
-                alignItems: "center",
-                backgroundColor: "#fff",
-              }}
-            >
-              {v.src && (
-                <img
-                  style={{
-                    height: "100%",
-                    width: "128px",
-                    backgroundSize: "100% 100%",
-                    marginRight: "15px",
-                  }}
-                  src={v.src}
-                />
-              )}
-              <div style={{ marginLeft: !v.src ? "38px" : "0" }}>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "#484848",
-                    fontWeight: "500",
-                    marginBottom: "5px",
-                  }}
-                >
-                  {v.nick_name}
-                </div>
-                <div
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: "600",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {v.content}
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    height: "13px",
-                    fontSize: "13px",
-                    color: "#afafaf",
-                    gap: "10px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
+            <div onClick={() => onClickHandle(v.id)} className={cx("item")}>
+              {v.src && <img className={cx("profile_img")} src={v.src} />}
+              <div style={{ marginLeft: !v.src ? "38px" : "0", width: "100%" }}>
+                <div className={cx("nickname")}>{v.nick_name}</div>
+                <div className={cx("content")}>{v.content}</div>
+                <div className={cx("count_wrap")}>
                   <div>
                     조회수 {+v.view_count > 999 ? "999+" : v.view_count}
                   </div>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "1px",
-                      backgroundColor: "#afafaf",
-                    }}
-                  />
+                  <div className={cx("line")} />
                   <div>
                     댓글 {+v.comment_count > 999 ? "999+" : v.comment_count}
                   </div>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "1px",
-                      backgroundColor: "#afafaf",
-                    }}
-                  />
+                  <div className={cx("line")} />
                   <div>추천 {+v.like > 999 ? "999+" : v.like}</div>
                 </div>
               </div>
@@ -334,7 +218,8 @@ const Walk = () => {
           ))}
         </div>
       </div>
-      <div
+      <motion.div
+        whileTap={{ scale: "0.9" }}
         style={{
           width: "60px",
           height: "60px",
@@ -353,7 +238,7 @@ const Walk = () => {
           style={{ width: "28px", marginBottom: "-4px" }}
           src="/images/icon/chatting_pupple.png"
         />
-      </div>
+      </motion.div>
       <Footer />
     </div>
   );

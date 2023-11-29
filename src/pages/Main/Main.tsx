@@ -1,13 +1,11 @@
 import className from "classnames/bind";
 import { Footer } from "component/Footer";
-import { BottomModal, CommentModal } from "component/Main";
-import { Side } from "component/Main/Side";
+import { BottomModal, CommentModal, Side } from "component/Main";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Main.module.scss";
 import ReactPlayer from "react-player";
 import { useLongPress } from "use-long-press";
 import { useDoubleTap } from "use-double-tap";
-import { FooterKind } from "@utils/types/footerKind";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
 import { DetailModal } from "component/Main/DetailModal/DetailModal";
@@ -21,7 +19,6 @@ const cx = className.bind(styles);
 
 const Main = () => {
   const [mute, setMute] = useState(true);
-  const [like, setLike] = useState(false);
   const [press, setPress] = useState(false);
   const [played, setPlayed] = useState(0);
 
@@ -177,7 +174,9 @@ const Main = () => {
 
   return (
     <div className={cx("container")}>
-      {datailModalVisible && <DetailModal modalHandle={modalHandle} />}
+      {datailModalVisible && (
+        <DetailModal modalHandle={modalHandle} kind="delete" />
+      )}
       <div className={cx("video_container")} ref={videoWrapRef}>
         {data.map((v, idx) => (
           <div
