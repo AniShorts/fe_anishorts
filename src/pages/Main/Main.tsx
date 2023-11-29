@@ -86,9 +86,6 @@ const Main = () => {
       setCommentModalVisible((prev) => !prev);
     }
   };
-  const FooterHandle = (kind: FooterKind) => {
-    console.log(kind);
-  };
 
   const modalHandle = (
     kind: "comment" | "bottom" | "detail",
@@ -253,7 +250,7 @@ const Main = () => {
       </div>
       <CommentModal visible={commentModalVisible} modalHandle={modalHandle} />
       <BottomModal modalHandle={modalHandle} visible={bottomModalVisible} />
-      <Footer played={played} clickHandle={FooterHandle} />
+      <Footer played={played} />
     </div>
   );
 };
