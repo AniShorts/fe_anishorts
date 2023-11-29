@@ -2,9 +2,8 @@ import className from "classnames/bind";
 import styles from "./WalkDetail.module.scss";
 import { useState } from "react";
 import { useLongPress } from "use-long-press";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
-import { DetailModal } from "component/Main/DetailModal/DetailModal";
 import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
@@ -17,23 +16,17 @@ const WalkDetail = () => {
   };
 
   const [commentId, setCommentId] = useState<any>("");
-  const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [isMine, setIsMine] = useState(false);
+  const [commentisMine, setCommentIsMine] = useState(false);
+  const [more, setMore] = useState(false);
 
   const bindPress = useLongPress((_e, v) => {
     const id = v.context;
     setCommentId(id);
-    setDetailModalVisible(true);
   });
 
-  const modalHandle = (
-    _type: "detail",
-    visible: boolean,
-    kind?: "delete" | "report"
-  ) => {
-    if (!visible) {
-      setDetailModalVisible(false);
-      console.log(kind, commentId);
-    }
+  const onClickEtcIcon = () => {
+    setMore((prev) => !prev);
   };
 
   const [data] = useState([
@@ -211,10 +204,7 @@ const WalkDetail = () => {
   ]);
 
   return (
-    <div className={cx("container")}>
-      {detailModalVisible && (
-        <DetailModal modalHandle={modalHandle} kind="report" />
-      )}
+    <div className={cx("container")} onClick={() => setMore(false)}>
       <div className={cx("wrap")}>
         <div className={cx("handle_wrap")}>
           <img
@@ -222,7 +212,83 @@ const WalkDetail = () => {
             src="/images/icon/down.png"
             onClick={onClickBackIcon}
           />
-          <img src="/images/icon/etc_black.png" className={cx("etc_img")} />
+          <div style={{ position: "relative" }}>
+            <img
+              onClick={(e) => {
+                e.stopPropagation();
+                onClickEtcIcon();
+              }}
+              src="/images/icon/etc_black.png"
+              className={cx("etc_img")}
+            />
+            <AnimatePresence>
+              {more && (
+                <motion.div
+                  style={{
+                    position: "absolute",
+                    right: "0",
+                    top: "30px",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                    width: "100px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                  }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.2 }}
+                  initial={{
+                    opacity: more ? 0 : 1,
+                    y: -20,
+                  }}
+                  animate={{
+                    opacity: more ? 2 : 0,
+                    y: 0,
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <motion.div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "8px 0",
+                      borderRadius: "8px 8px 0 0",
+                      cursor: "pointer",
+                    }}
+                    whileHover={{ backgroundColor: "#e0e0e0" }}
+                  >
+                    {isMine ? "수정하기" : "신고하기"}
+                  </motion.div>
+                  <motion.div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "8px 0",
+                      cursor: "pointer",
+                    }}
+                    whileHover={{ backgroundColor: "#e0e0e0" }}
+                  >
+                    공유하기
+                  </motion.div>
+                  <motion.div
+                    onClick={() => setMore(false)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "8px 0",
+                      cursor: "pointer",
+                      borderRadius: "0 0 8px 8px",
+                    }}
+                    whileHover={{ backgroundColor: "#e0e0e0" }}
+                  >
+                    닫기
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
         <img src={`/images/icon/walk.png`} className={cx("walk_img")} />
         <div className={cx("body")}>
@@ -337,9 +403,76 @@ const WalkDetail = () => {
                   display: "flex",
                   fontSize: "16px",
                   padding: "13px 22px",
+                  position: "relative",
                 }}
                 whileTap={{ backgroundColor: "#3333334a" }}
               >
+                <AnimatePresence>
+                  <motion.div
+                    style={{
+                      position: "absolute",
+                      backgroundColor: "#3333337b",
+                      width: "100%",
+                      height: "100%",
+                      left: "0",
+                      top: "0",
+                      borderRadius: "5px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "17px",
+                    }}
+                    initial={{
+                      opacity: v.id === commentId ? 0 : 1,
+                      y: 20,
+                    }}
+                    animate={{
+                      opacity: v.id === commentId ? 1 : 0,
+                      y: 0,
+                    }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <motion.div
+                      style={{
+                        color: "#fff",
+                        backgroundColor: "#ff7e84",
+                        width: "120px",
+                        padding: "10px 0",
+                        display: "flex",
+                        justifyContent: "center",
+                        borderRadius: "7px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        letterSpacing: "0.32px",
+                      }}
+                      whileTap={{ scale: "1.05" }}
+                    >
+                      {commentisMine ? "삭제하기" : "신고하기"}
+                    </motion.div>
+                    <motion.div
+                      style={{
+                        color: "#fff",
+                        backgroundColor: "#ff7e84",
+                        width: "120px",
+                        padding: "10px 0",
+                        display: "flex",
+                        justifyContent: "center",
+                        borderRadius: "7px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        letterSpacing: "0.32px",
+                      }}
+                      onClick={() => setCommentId("")}
+                      whileTap={{ scale: "1.05" }}
+                    >
+                      닫기
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+
                 <img
                   className={cx("pointer_img")}
                   src={v.src ? v.src : "/images/icon/profile.png"}
