@@ -1,9 +1,10 @@
 import className from "classnames/bind";
 import styles from "./Footer.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import theme from "theme";
 import { FooterKind } from "@utils/types/footerKind";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const cx = className.bind(styles);
 
@@ -19,20 +20,29 @@ type Props = {
 
 export function Footer({ played, clickHandle }: Props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [arr] = useState<Arr[]>([
-    { title: "홈", src: "home" },
-    { title: "검색", src: "search" },
-    { title: "더보기", src: "create" },
-    { title: "마이펫", src: "walk" },
-    { title: "설정", src: "setting" },
+    { title: "홈", src: "/home" },
+    { title: "검색", src: "/search" },
+    { title: "더보기", src: "/create" },
+    { title: "산책", src: "/walk" },
+    { title: "설정", src: "/setting" },
   ]);
   const [ableItem, setAbleItem] = useState("홈");
 
   const onClickHandle = (kind: FooterKind, src: string) => {
-    setAbleItem(kind);
-    navigate(`/${src}`);
+    navigate(`${src}`);
     clickHandle && clickHandle(kind);
   };
+
+  useEffect(() => {
+    console.log(location.pathname);
+    arr.map((v) => {
+      if (location.pathname === v.src) {
+        return setAbleItem(v.title);
+      }
+    });
+  }, [location.pathname]);
 
   return (
     <div className={cx("container")}>
@@ -48,8 +58,9 @@ export function Footer({ played, clickHandle }: Props) {
               className={cx("dot")}
               style={{ opacity: v.title === ableItem ? "1" : "0" }}
             />
-            <img
-              src={`/images/icon/${v.src}${
+            <motion.img
+              whileTap={{ scale: "1.2" }}
+              src={`/images/icon${v.src}${
                 v.title === ableItem ? "_able" : ""
               }.png`}
             />
