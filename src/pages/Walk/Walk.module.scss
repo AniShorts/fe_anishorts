@@ -1,0 +1,143 @@
+@import "../../../public/scss/styles.scss";
+
+.container {
+  width: 100vw;
+  max-width: 500px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.search_cotainer {
+  background-color: #fff;
+  padding-bottom: 30px;
+  padding-top: 55px;
+  min-height: 207px;
+}
+
+.logo_wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.search_wrap {
+  display: flex;
+  height: 44px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.search_input {
+  display: flex;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  gap: 10px;
+  width: calc(100% - 100px);
+}
+
+.seartch_input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 18px;
+  width: 100%;
+}
+
+.body {
+  height: calc(100% - 378px);
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: solid 2px #f2f2f2;
+}
+
+.item {
+  display: flex;
+  min-height: 84px;
+  align-items: center;
+  background-color: #fff;
+  cursor: pointer;
+  overflow-x: hidden;
+}
+
+.label {
+  height: 100%;
+}
+
+.label_body {
+  display: flex;
+  padding: 26px 30px 14px 35px;
+  justify-content: space-between;
+  background-color: #fff;
+  border-bottom: solid 2px #f2f2f2;
+  white-space: nowrap;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.nickname {
+  font-size: 13px;
+  color: #484848;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.content {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  width: calc(100% - 120px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.count_wrap {
+  display: flex;
+  height: 13px;
+  font-size: 13px;
+  color: #afafaf;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.line {
+  height: 100%;
+  width: 1px;
+  background-color: #afafaf;
+}
+
+// 이미지
+
+.logo_img {
+  width: 53vw;
+  max-width: 250px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.search_img {
+  width: 30px;
+  margin-top: -5px;
+}
+
+.note_img {
+  width: 40px;
+  margin-top: -13px;
+}
+
+.profile_img {
+  height: 100%;
+  width: 128px;
+  background-size: 100% 100%;
+  margin-right: 15px;
+}
