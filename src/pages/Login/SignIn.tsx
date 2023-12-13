@@ -27,10 +27,11 @@ const SignIn: React.FC = () => {
     const WaitLogin = async (data: any) => {
         // const answer = await loginApi(data);
         // console.log(answer);
+        // 토큰관리는 쿠키로 할것
         // if (answer) {
         //     navigate(`/main`);
         // }
-    }
+    }    
     return (
         <>
             <form className={cx("container")} onSubmit={handleSubmit((data) => WaitLogin(data))}>
@@ -55,8 +56,9 @@ const SignIn: React.FC = () => {
                 </div>
                 {errors.nickname?.message && <span className={cx('errorText')}>{errors?.email?.toString()}</span> || errors.password?.message && <span className={cx('errorText')}>비밀번호 형식이 맞지않습니다</span>}
                 <div className={cx("wrap")}>
-                    <Btn title='로그인' nav='asd' />
-                    <Btn title='카카오톡으로 빠른 로그인' nav='asd'/>
+                    {/* <Btn title='로그인' nav='asd' />
+                    <Btn title='카카오톡으로 빠른 로그인' nav='asd'/> */}
+                    <button>asd</button>
                 </div>
                 <div className={cx('findBox')}>
                     <span onClick={() => { navigate(`/signup`) }}>아이디 찾기</span>
