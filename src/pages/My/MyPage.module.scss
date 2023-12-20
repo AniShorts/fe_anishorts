@@ -6,9 +6,9 @@
   display: flex;
   justify-content: space-between;
   padding: 50px;
-  @include view("mobile") {
-    background-color: red;
-  }
+  // @include view("mobile") {
+  //   background-color: red;
+  // }
 }
 
 .img-container {
