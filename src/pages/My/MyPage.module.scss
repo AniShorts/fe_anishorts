@@ -2,9 +2,7 @@
 // @import "public/public/scss/mixin";
 
 .profile-container {
-  background-color: rgb(136, 243, 202);
   display: flex;
-  justify-content: space-between;
   padding: 50px;
   // @include view("mobile") {
   //   background-color: red;
@@ -24,9 +22,14 @@
 .pre-img {
   // width: 100%;
   // height: 100%;
+  position: relative;
   width: 100px;
   height: 100px;
   object-fit: cover;
+}
+
+.userInformation {
+  background-color: red;
 }
 
 .nickname-container {
@@ -63,4 +66,14 @@
   // @include view("mobile") {
   //   font-size: 17px;
   // }
+}
+
+.image-icon {
+  background: url("../../../public/images/icon/check.png");
+  width: 21.9px;
+  height: 21.9px;
+  position: absolute;
+  bottom: auto;
+  top: 12rem;
+  left: 13rem;
 }
