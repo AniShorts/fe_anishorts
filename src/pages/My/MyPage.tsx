@@ -1,14 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
 import styles from "./MyPage.module.scss";
-import previewImg from "../img/img_blue.jpg";
 import className from "classnames/bind";
+import UserInformation from "component/My/UserInformation";
+import Tab from "component/My/Tab";
 
 const cx = className.bind(styles);
 
 const MyPage: React.FC = () => {
-  const [profileImage, setProfileImage] = useState<any>(previewImg);
+  const [profileImage, setProfileImage] = useState<any>(null);
   const [preview, setPreview] = useState<any>("");
+  const [clickTab, setClickTab] = useState(0);
+
+  //tab 배열
+  const menuArr = [
+    { name: '게시물'},
+    { name: '좋아요'},
+    { name: '저장'},
+  ];
+
+  // tab 바꾸는 함수
+  const selectMenuHandler = (index: number) => {
+    setClickTab(index);
+  };
 
   const onChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -65,62 +78,54 @@ const MyPage: React.FC = () => {
 
   return (
     <>
-      <div className={cx("profile-container")}>
-        <div className="img-container">
+      <div className={cx("img-box")}>
+        <img
+          className={cx("pre-img")}
+          src={profileImage ? profileImage : "images/icon/profile.png"}
+          alt="img"
+        />
+        <label className={cx("img-icon")} htmlFor="file" onClick={handleClick}>
           <img
-            className="pre-img"
-            src={profileImage ? profileImage : previewImg}
-            alt="img"
+            src={"/images/icon/check.png"}
+            alt="사진 추가 아이콘"
           />
-        </div>
-        <div className="userInformation">
-          <p className="nickname">김땡땡</p>
-          <p className="follower">999명</p>
-        </div>
-        <div>
-          {/* hidden input */}
-          <input
-            className="input"
-            type="file"
-            accept="image/*"
-            ref={fileRef}
-            onChange={onChangeImg}
-          />
-        </div>
-        <label htmlFor="file" className="labelButton" onClick={handleClick}>
-          ---
         </label>
+        <h3>{"!닉네임"}</h3>
+        {/* hidden input */}
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileRef}
+          onChange={onChangeImg}
+          hidden
+        />
       </div>
-      <div className="main-container">
-        <div className="video-container">
-          <ReactPlayer
-            className="react-player"
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            controls={true}
-          />
-          <ReactPlayer
-            className="react-player"
-            url="https://www.youtube.com/watch?v=l_iXA_KZSEk"
-            controls={true}
-          />
-          <ReactPlayer
-            className="react-player"
-            s
-            url="https://www.youtube.com/watch?v=-8Jbpenn3o4"
-            controls={true}
-          />
-          <ReactPlayer
-            className="react-player"
-            url="https://www.youtube.com/watch?v=-8Jbpenn3o4"
-            controls={true}
-          />
-          <ReactPlayer
-            className="react-player"
-            url="https://www.youtube.com/watch?v=-8Jbpenn3o4"
-            controls={true}
-          />
-        </div>
+      <div className={cx("info-box")}>
+        {/* 1번안 */}
+        <UserInformation info="팔로잉" number={11} />
+        <UserInformation info="팔로워" number={111} />
+        <UserInformation info="게시물" number={111} />
+        {/* 2번안 
+            이유: 추후에 유저 인포를 클릭시 모달창이 나와야해서 
+          <div className={cx("userInformation")}>
+          <p>11</p>
+          <p>게시물</p>
+        </div> */}
       </div>
+      <div className={cx("profile-box")}>
+        <button type="button">프로필 편집</button>
+      </div>
+      <ul className={cx('tab')}>
+        {menuArr.map((el:{name:string}, index: number) => (
+          <li
+            className={cx(index === clickTab ? 'focused' : 'submenu')}
+            onClick={() => selectMenuHandler(index)}
+          >
+            {el.name}
+          </li>
+        ))}
+      </ul>
+      <Tab clickTab={clickTab} info={"정보들"}/>
     </>
   );
 };
