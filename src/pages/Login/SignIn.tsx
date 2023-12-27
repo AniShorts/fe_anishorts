@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const SignIn: React.FC = () => {
     const cx = className.bind(styles);
     const navigate = useNavigate();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({});
-
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const nicknameOpt = {
         required: "닉네임은 필수 입력입니다",
         maxLength: { value: 8, message: "8자 이하로 정해주세요" },
@@ -32,6 +31,7 @@ const SignIn: React.FC = () => {
         //     navigate(`/main`);
         // }
     }    
+      
     return (
         <>
             <form className={cx("container")} onSubmit={handleSubmit((data) => WaitLogin(data))}>
@@ -52,12 +52,12 @@ const SignIn: React.FC = () => {
                         type='password'
                         {...register("password", pwOpt)}
                     />
-                     {!errors.password?.message && <span className={cx('test')} />}
+                     {/* {!errors.password?.message && <span className={cx('test')} />} */}
                 </div>
-                {errors.nickname?.message && <span className={cx('errorText')}>{errors?.email?.toString()}</span> || errors.password?.message && <span className={cx('errorText')}>비밀번호 형식이 맞지않습니다</span>}
+                {errors.nickname?.message && <span className={cx('errorText')}>{errors?.email?.toString()}</span> || errors.password?.message && <span className={cx('errorText')}>{errors?.password?.toString()}</span>}
                 <div className={cx("wrap")}>
-                    {/* <Btn title='로그인' nav='asd' />
-                    <Btn title='카카오톡으로 빠른 로그인' nav='asd'/> */}
+                    <Btn title='로그인' nav='null' move={false}/>
+                    <Btn title='카카오톡으로 빠른 로그인' nav='kakao' move={true}/>
                     <button>asd</button>
                 </div>
                 <div className={cx('findBox')}>
