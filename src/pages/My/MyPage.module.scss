@@ -12,6 +12,10 @@
     margin: 3rem 0 2rem 0;
     font-size: 2rem;
   }
+
+  img {
+    border-radius: 50%;
+  }
 }
 
 .pre-img {
@@ -76,6 +80,7 @@
   flex-direction: row;
   align-items: center;
   list-style: none;
+  overflow-y: scroll;
 
   .submenu {
     display: flex;
@@ -106,8 +111,15 @@
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
 .react-player {
   margin-bottom: 0.4rem;
+  overflow: scroll;
+}
+
+.test {
+  overflow: hidden;
+  height: 100vh;
 }
