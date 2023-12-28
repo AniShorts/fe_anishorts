@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Main, Intro, SignIn, Signup, Category, Splash } from "pages";
+import { Main, Intro, SignIn, Signup, Category, Splash, MyPage } from "pages";
 import Walk from "pages/Walk/Walk";
 import WalkDetail from "pages/WalkDetail/WalkDetail";
 
@@ -16,6 +16,7 @@ const Router = () => {
         <Route path="/Splash" element={<Splash />} />
         <Route path="/walk" element={<Walk />} />
         <Route path="/walk/:id" element={<WalkDetail />} />
+        <Route path="/mypage" element={<MyPage />} />
         {/* <Route path="/EditPage" element={<EditPage />} /> */}
       </Routes>
     </>

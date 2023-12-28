@@ -1,66 +1,125 @@
 // @import "../../public/scss/mixin/style.scss";
 // @import "public/public/scss/mixin";
 
-.profile-container {
-  background-color: rgb(136, 243, 202);
+.img-box {
   display: flex;
-  justify-content: space-between;
-  padding: 50px;
-  @include view("mobile") {
-    background-color: red;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5rem;
+
+  h3 {
+    margin: 3rem 0 2rem 0;
+    font-size: 2rem;
+  }
+
+  img {
+    border-radius: 50%;
   }
 }
 
-.img-container {
-  background-color: aqua;
-  display: flex;
-  margin: 10px 50px;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
 .pre-img {
-  // width: 100%;
-  // height: 100%;
-  width: 100px;
-  height: 100px;
+  position: relative;
+  width: 12rem;
+  height: 12rem;
   object-fit: cover;
 }
 
-.nickname-container {
-  background-color: rgb(193, 250, 203);
+.img-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 14rem;
+  margin-left: 8rem;
+
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
-.input {
-  display: none;
+.info-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5.4rem;
 }
-.main-container {
-  background-color: gold;
+
+.userInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.4rem;
+
+  p:first-child {
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+  }
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  button {
+    margin-top: 1rem;
+    padding: 0.8rem 12rem;
+    border: 1px solid #a97dff;
+    border-radius: 0.4rem;
+    background-color: white;
+  }
+}
+
+.tab {
+  margin-top: 1rem;
+  color: #E2E2E2;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  overflow-y: scroll;
+
+  .submenu {
+    display: flex;
+    width: calc(100% /3);
+    align-items: center;
+    justify-content: center;
+    // padding: 1rem;
+    font-size: 15px;
+    transition: 0.5s;
+    border-radius: 0.2rem 0.2rem 0 0;
+  }
+}
+
+.focused {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% /3);
+  padding: 1rem;
+  font-size: 15px;
+  border-radius: 1rem 1rem 0px 0px;
+  border-bottom: 3px solid #a97dff;
+  color: black;
 }
 
 .video-container {
-  background-color: #ffd9b7;
   display: flex;
-  justify-content: center;
-  /* margin: 20px auto; */
-  padding: 10px;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
 }
-/*
-.react-player {
-  width: 100px;
-  height: 100px;
-  border-radius: 10%;
-} */
 
-.video {
-  width: 100px;
-  height: 60px;
-  border-radius: 10%;
-  object-fit: cover;
-  margin: 10px;
-  // @include view("mobile") {
-  //   font-size: 17px;
-  // }
+.react-player {
+  margin-bottom: 0.4rem;
+  overflow: scroll;
+}
+
+.test {
+  overflow: hidden;
+  height: 100vh;
 }
