@@ -16,7 +16,6 @@ const Signup: React.FC = () => {
     email: string;
     emailConfirm: string;
   };
-  const accessToken = localStorage.getItem("accessToken");
 
   const { register, getValues, handleSubmit, setError, formState: { errors } } = useForm<FormInputs>();
   const navigate = useNavigate();

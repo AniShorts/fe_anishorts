@@ -3,7 +3,6 @@ import { Btn } from 'component/Login'
 import { useForm } from 'react-hook-form'
 import className from "classnames/bind";
 import styles from "../../pages/Login/SignIn.module.scss"
-import { loginApi } from 'apis/loginApi';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup";
