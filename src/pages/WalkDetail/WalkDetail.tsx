@@ -1,14 +1,23 @@
 import className from "classnames/bind";
 import styles from "./WalkDetail.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLongPress } from "use-long-press";
 import { AnimatePresence, motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { GetWalkDetail, GetWalkDetailDTO } from "apis/walk";
+import { useRecoilState } from "recoil";
+import { errorTextState } from "recoil/atom";
 
 const cx = className.bind(styles);
 
 const WalkDetail = () => {
+  // const { getQueryUser } = useBindGetUserHook();
+
+  const [_, setErrorText] = useRecoilState(errorTextState);
+  const location = useLocation();
+
   const navigation = useNavigate();
 
   const onClickBackIcon = () => {
@@ -29,7 +38,9 @@ const WalkDetail = () => {
     setMore((prev) => !prev);
   };
 
-  const [data] = useState([
+  const [data, setData] = useState<GetWalkDetailDTO>();
+
+  const [comment, setComment] = useState([
     {
       nick_name: "룰라리",
       id: uuidv4(),
@@ -203,6 +214,23 @@ const WalkDetail = () => {
     },
   ]);
 
+  // useEffect(() => {
+  //   console.log(getQueryUser.data);
+  // }, [getQueryUser.data]);
+
+  const [detailId] = useState(location.pathname.split("walk/")[1]);
+
+  useQuery(["GetWalkDetail", detailId], () => GetWalkDetail(String(detailId)), {
+    onSuccess(data) {
+      const newData = data.result;
+      setData(newData);
+    },
+    onError(error: any) {
+      setErrorText(error?.response.data.result.message);
+    },
+    enabled: !!detailId,
+  });
+
   return (
     <div className={cx("container")} onClick={() => setMore(false)}>
       <div className={cx("wrap")}>
@@ -294,94 +322,15 @@ const WalkDetail = () => {
         <div className={cx("body")}>
           <div className={cx("profile")}>
             <img className={cx("profile_img")} src="/images/icon/profile.png" />
-            <div>아이디입니다</div>
+            <div>{data?.user?.nickname}</div>
           </div>
-          <div className={cx("title")}>
-            내용 입니다내용 입니다내용 입니다내용 입니다내용 입니다내용
-            입니다내용 입니다내용 입니다내용 입니다내용 입니다내용 입니다
-          </div>
-          <div className={cx("date")}>2023년 11월 29일</div>
+          <div className={cx("title")}>{data?.walkTitle}</div>
+          <div className={cx("date")}>{data?.createAt}</div>
         </div>
       </div>
       <div>
         <div className={cx("content_wrap")}>
-          <div className={cx("content")}>
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ 잊마ㅚ옺미임죄잊뫼엊ㅁ
-            잊마ㅚ옺미임죄잊뫼엊ㅁ
-          </div>
+          <div className={cx("content")}>{data?.walkContent}</div>
           <div className={cx("btn")}>
             <img
               className={cx("chatting_img")}
@@ -396,7 +345,7 @@ const WalkDetail = () => {
             <div>10명이 좋아요를 눌렀습니다.</div>
           </div>
           <div className={cx("map_container")}>
-            {data.map((v) => (
+            {comment.map((v) => (
               <motion.div
                 {...bindPress(v.id)}
                 style={{
