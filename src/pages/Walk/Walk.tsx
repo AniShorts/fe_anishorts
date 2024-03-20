@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
+import { useQuery } from "react-query";
+import { GetWalkList } from "apis/walk";
 
 const cx = className.bind(styles);
 
@@ -174,6 +176,28 @@ const Walk = () => {
       navigate(`${location.pathname}/create`);
     }
   };
+
+  useQuery(
+    [
+      "GetWalkList",
+      "의존성 배열 ex) currentPage = 쿼리를 한 번 더 요청하고 싶을 때 씀",
+    ],
+    () =>
+      GetWalkList(
+        "0"
+        //api에서 필요값 넣어주는 부분 앞에 0은 pageNumber임
+      ),
+    {
+      onSuccess(data) {
+        console.log(data);
+      },
+      onError(err) {
+        console.log(err);
+      },
+      // 옵션값 이 값을 넣어두면 enabled가 true일 시에만 쿼리를 요청함, 위 의존성배열에 의지해서 요청됌
+      // ex) 디테일 id가 있을때 요청되야 하는데 그냥 요청 될시 넣어주면 좋음
+    }
+  );
 
   return (
     <div className={cx("container")}>

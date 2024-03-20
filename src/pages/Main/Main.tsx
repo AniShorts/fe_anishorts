@@ -8,6 +8,9 @@ import { useLongPress } from "use-long-press";
 import { useDoubleTap } from "use-double-tap";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
+import { GetVideo } from "apis/home";
+import { loginApi } from "apis/loginApi";
+import { useQuery } from "react-query";
 
 type Data = {
   id: string;
@@ -173,6 +176,21 @@ const Main = () => {
       }
     }
   }, [ableId]);
+
+  // useEffect(() => {
+  //   const video = loginApi();
+
+  //   console.log(video);
+  // }, []);
+
+  useQuery(["GetDbLock"], () => GetVideo(), {
+    onSuccess(data) {
+      console.log(data);
+    },
+    onError(err) {
+      console.log(err);
+    },
+  });
 
   return (
     <div className={cx("container")}>
