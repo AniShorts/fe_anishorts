@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Main, Intro, SignIn, Signup, Category, Splash } from "pages";
 import Walk from "pages/Walk/Walk";
 import WalkDetail from "pages/WalkDetail/WalkDetail";
+import WalkCreate from "pages/WalkCreate/WalkCreate";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/Splash" element={<Splash />} />
         <Route path="/walk" element={<Walk />} />
         <Route path="/walk/:id" element={<WalkDetail />} />
+        <Route path="/walk/create" element={<WalkCreate />} />
         {/* <Route path="/EditPage" element={<EditPage />} /> */}
       </Routes>
     </>

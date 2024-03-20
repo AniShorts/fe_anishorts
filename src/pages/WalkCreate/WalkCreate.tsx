@@ -1,23 +1,48 @@
 import className from "classnames/bind";
-import styles from "./Walk.module.scss";
-import { Footer } from "component/Footer";
+import styles from "./WalkCreate.module.scss";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLongPress } from "use-long-press";
 import { v4 as uuidv4 } from "uuid";
-import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const cx = className.bind(styles);
 
-const Walk = () => {
+const WalkCreate = () => {
+  const navigation = useNavigate();
+
+  const onClickBackIcon = () => {
+    navigation(-1);
+  };
+
+  const [commentId, setCommentId] = useState<any>("");
+  const [isMine, setIsMine] = useState(false);
+  const [commentisMine, setCommentIsMine] = useState(false);
+  const [more, setMore] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+
+  const bindPress = useLongPress((_e, v) => {
+    const id = v.context;
+    setCommentId(id);
+  });
+
+  const onClickEtcIcon = () => {
+    setMore((prev) => !prev);
+  };
+
   const [data] = useState([
     {
       nick_name: "룰라리",
       id: uuidv4(),
-      content: "dawdwadwadadawdwadwadadawdwadwadadawdwadwada",
+      content:
+        "dawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwadadawdwadwada",
       src: "/images/icon/walk.png",
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -27,6 +52,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -36,6 +62,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -45,6 +72,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -54,6 +82,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -63,6 +92,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -72,6 +102,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -81,6 +112,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -90,6 +122,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -99,6 +132,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -108,6 +142,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -117,6 +152,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -126,6 +162,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -135,6 +172,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -144,6 +182,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -153,6 +192,7 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
     {
       nick_name: "dwadaw",
@@ -162,94 +202,45 @@ const Walk = () => {
       view_count: "22222222",
       comment_count: "2222",
       like: "222",
+      time: "10분전",
     },
   ]);
 
-  const location = useLocation();
-  const navigate = useNavigate();
-  const onClickHandle = (id?: string) => {
-    if (id) {
-      navigate(`${location.pathname}/${id}`);
-    } else {
-      navigate(`${location.pathname}/create`);
-    }
-  };
-
   return (
-    <div className={cx("container")}>
-      <div className={cx("search_cotainer")}>
-        <div className={cx("logo_wrap")}>
-          <img className={cx("logo_img")} src="/images/icon/post_logo.png" />
-        </div>
-        <div className={cx("search_wrap")}>
-          <div className={cx("search_input")}>
-            <div>
-              <img
-                className={cx("search_img")}
-                src="/images/icon/search_gray.png"
-              />
-            </div>
-            <input
-              placeholder="게시물 검색하기"
-              className={cx("seartch_input")}
-            />
-          </div>
+    <div className={cx("container")} onClick={() => setMore(false)}>
+      <div className={cx("wrap")}>
+        <div className={cx("handle_wrap")}>
           <img
-            onClick={() => onClickHandle()}
-            className={cx("note_img")}
-            src="/images/icon/note.png"
+            className={cx("down_img")}
+            src="/images/icon/down.png"
+            onClick={onClickBackIcon}
           />
         </div>
+        <img src={`/images/icon/walk.png`} className={cx("walk_img")} />
       </div>
-      <div className={cx("label")}>
-        <div className={cx("label_body")}>POST</div>
-        <div className={cx("body")}>
-          {data.map((v) => (
-            <div onClick={() => onClickHandle(v.id)} className={cx("item")}>
-              {v.src && <img className={cx("profile_img")} src={v.src} />}
-              <div style={{ marginLeft: !v.src ? "38px" : "0", width: "100%" }}>
-                <div className={cx("nickname")}>{v.nick_name}</div>
-                <div className={cx("content")}>{v.content}</div>
-                <div className={cx("count_wrap")}>
-                  <div>
-                    조회수 {+v.view_count > 999 ? "999+" : v.view_count}
-                  </div>
-                  <div className={cx("line")} />
-                  <div>
-                    댓글 {+v.comment_count > 999 ? "999+" : v.comment_count}
-                  </div>
-                  <div className={cx("line")} />
-                  <div>추천 {+v.like > 999 ? "999+" : v.like}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <motion.div
-        whileTap={{ scale: "0.9" }}
+      <div
         style={{
-          width: "60px",
-          height: "60px",
-          borderRadius: "100%",
-          backgroundColor: "#000",
-          position: "absolute",
-          bottom: "110px",
-          right: "15px",
+          flexDirection: "column",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: "pointer",
+          backgroundColor: "#fff",
+          gap: "12px",
+          fontSize: "21px",
+          fontWeight: "600",
         }}
       >
-        <img
-          style={{ width: "28px", marginBottom: "-4px" }}
-          src="/images/icon/chatting_pupple.png"
-        />
-      </motion.div>
-      <Footer />
+        <div>제목</div>
+        <input />
+        <div>내용</div>
+        <textarea />
+        <div className={cx("datePicker")}>
+          <Calendar value={date}></Calendar>
+        </div>
+        <div className={cx("btn")}>
+          <div>작성하기</div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Walk;
+export default WalkCreate;
