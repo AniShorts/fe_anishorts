@@ -34,9 +34,11 @@ const Category: React.FC = () => {
         }   
     }
     useEffect(() => {
-        getCategoryApi();
+        // getCategoryApi();
     }, [])
 
+    console.log(select);
+    
     return (
         <>
             <div className={cx('sort')}>
