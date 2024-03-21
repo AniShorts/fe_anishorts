@@ -52,12 +52,25 @@
 }
 
 .body {
-  height: calc(100% - 154px);
+  padding-bottom: 362px;
+  height: 100%;
   overflow: scroll;
   display: flex;
   flex-direction: column;
   gap: 2px;
   border-bottom: solid 2px #f2f2f2;
+}
+
+.body::-webkit-scrollbar {
+  width: 0;
+}
+
+.body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 .item {
