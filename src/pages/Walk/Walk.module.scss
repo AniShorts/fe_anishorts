@@ -52,7 +52,7 @@
 }
 
 .body {
-  height: calc(100% - 378px);
+  height: calc(100% - 154px);
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -67,6 +67,9 @@
   background-color: #fff;
   cursor: pointer;
   overflow-x: hidden;
+  &:active {
+    opacity: 0.7;
+  }
 }
 
 .label {
