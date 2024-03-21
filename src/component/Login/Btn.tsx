@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 type IProps = {
   title: string;
   nav: string;
+  move: boolean;
 };
 
 const Btn = (props: IProps) => {
@@ -15,11 +16,9 @@ const Btn = (props: IProps) => {
   return (
     <>
       {
-        props.title === "로그인" ?
-          <button onClick={()=> navigate(`/${props.nav}`)} className={cx("purpleBtn")}>{props.title}
-          </button> :
-           <button type='button' onClick={()=> navigate(`/${props.nav}`)} className={cx("whiteBtn")}>{props.title}
-           </button>
+        props.move ?
+          <button onClick={() => { navigate(`/${props.nav}`) }} className={cx(props.title === "로그인" ? "purpleBtn" : "whiteBtn")}>{props.title}</button> :
+          <button className={cx(props.title === "로그인" ? "purpleBtn" : "whiteBtn")}>{props.title}</button>
       }
     </>
   )

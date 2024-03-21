@@ -25,8 +25,8 @@ const Intro : React.FC = () => {
         <span><span className={cx('boldText')}>애니숏</span>을 통해 남겨보세요!</span>
       </div>
       <div className={cx('sort')}>
-        <Btn title='회원가입' nav='signup'/>
-        <Btn title='로그인' nav='signin'/>
+        <Btn title='회원가입' nav='signup' move={true}/>
+        <Btn title='로그인' nav='signin' move={true}/>
       </div>
 
       {/* <div className={cx("video_sort")}>
