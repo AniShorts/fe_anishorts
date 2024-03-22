@@ -10,6 +10,20 @@ const instance = axios.create({
   },
 });
 
+
+  //요청 인터셉터
+  instance.interceptors.request.use(
+    (config) => {
+        if(localStorage.getItem("accessToken")){
+            config.headers.Authorization = `Bearer ${localStorage.getItem("accessToken")}`
+        }
+
+        return config;
+    }
+);
+
+
+// 리프레시는 나중에 처리 할 예정
 // instance.interceptors.request.use(async (config) => {
 //     const accessToken = localStorage.getItem("accessToken");
 //     if (!accessToken) return config;
