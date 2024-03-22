@@ -8,7 +8,9 @@ import { useLongPress } from "use-long-press";
 import { useDoubleTap } from "use-double-tap";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
-import { DetailModal } from "component/Main/DetailModal/DetailModal";
+import { GetVideo } from "apis/home";
+import { loginApi } from "apis/loginApi";
+import { useQuery } from "react-query";
 
 type Data = {
   id: string;
@@ -23,10 +25,11 @@ const Main = () => {
   const [played, setPlayed] = useState(0);
 
   const [moreComment, setMoreComment] = useState(false);
-  const [datailModalVisible, setDetailModalVisible] = useState(false);
   const [commentModalVisible, setCommentModalVisible] =
     useState<boolean>(false);
   const [bottomModalVisible, setBottomModalVisible] = useState<boolean>(false);
+
+  const [sharedVisible, setSharedVisible] = useState(true);
 
   const bindPress = useLongPress(() => {
     setPress(!press);
@@ -91,9 +94,11 @@ const Main = () => {
     if (kind === "comment") {
       setCommentModalVisible(visible);
     } else if (kind === "bottom") {
+      setSharedVisible(true);
       setBottomModalVisible(visible);
     } else if (kind === "detail") {
-      setDetailModalVisible(visible);
+      setSharedVisible(false);
+      setBottomModalVisible(visible);
     } else {
       setMoreComment(visible);
     }
@@ -172,11 +177,23 @@ const Main = () => {
     }
   }, [ableId]);
 
+  // useEffect(() => {
+  //   const video = loginApi();
+
+  //   console.log(video);
+  // }, []);
+
+  useQuery(["GetDbLock"], () => GetVideo(), {
+    onSuccess(data) {
+      console.log(data);
+    },
+    onError(err) {
+      console.log(err);
+    },
+  });
+
   return (
     <div className={cx("container")}>
-      {datailModalVisible && (
-        <DetailModal modalHandle={modalHandle} kind="delete" />
-      )}
       <div className={cx("video_container")} ref={videoWrapRef}>
         {data.map((v, idx) => (
           <div
@@ -248,7 +265,11 @@ const Main = () => {
         ))}
       </div>
       <CommentModal visible={commentModalVisible} modalHandle={modalHandle} />
-      <BottomModal modalHandle={modalHandle} visible={bottomModalVisible} />
+      <BottomModal
+        modalHandle={modalHandle}
+        visible={bottomModalVisible}
+        sharedVisible={sharedVisible}
+      />
       <Footer played={played} />
     </div>
   );

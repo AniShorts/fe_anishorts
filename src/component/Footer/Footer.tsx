@@ -36,7 +36,6 @@ export function Footer({ played, clickHandle }: Props) {
   };
 
   useEffect(() => {
-    console.log(location.pathname);
     arr.map((v) => {
       if (location.pathname === v.src) {
         return setAbleItem(v.title);
